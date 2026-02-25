@@ -29,7 +29,7 @@ import {
 
 // Convert a Gregorian date to Hijri
 const hijri = toHijriDate(new Date(2023, 2, 23));
-// { hy: 1444, hm: 9, hd: 1 } — 1 Ramadan 1444
+// { hy: 1444, hm: 9, hd: 1 } - 1 Ramadan 1444
 
 // Convert back
 const gregorian = fromHijriDate(1444, 9, 1);
@@ -114,7 +114,7 @@ All functions accept an optional `options` argument for selecting the calendar s
 Two calendar systems are available via the `options.calendar` property.
 
 **Umm al-Qura (default):**
-The official calendar of Saudi Arabia. Covers 1356–1500 AH. Tabular data; deterministic.
+The official calendar of Saudi Arabia. Covers 1318–1500 AH (1900–2076 CE). Tabular data; deterministic.
 
 ```typescript
 import { toHijriDate } from 'date-fns-hijri';

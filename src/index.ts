@@ -23,7 +23,7 @@ import type { HijriDate, ConversionOptions } from './types';
  * Convert a Gregorian `Date` to a Hijri date object.
  *
  * Returns `null` when the date falls outside the calendar's supported range
- * (UAQ: 1356–1500 AH; FCNA extends slightly further).
+ * (UAQ: 1318–1500 AH / 1900–2076 CE; FCNA extends slightly further).
  */
 export function toHijriDate(date: Date, options?: ConversionOptions): HijriDate | null {
   return coreToHijri(date, options);
@@ -104,7 +104,7 @@ export function getHijriDay(date: Date, options?: ConversionOptions): number | n
 /**
  * Get the number of days in a Hijri month (29 or 30).
  *
- * @throws {Error} If the year/month combination is outside the calendar's range.
+ * @throws {RangeError} If the year is outside the calendar's supported range.
  */
 export function getDaysInHijriMonth(
   hy: number,
@@ -159,7 +159,7 @@ export function getHijriWeekdayName(
 // Formatting
 // ---------------------------------------------------------------------------
 
-/** Ordered token pattern — longer tokens must appear before shorter prefixes. */
+/** Ordered token pattern: longer tokens appear before shorter prefixes to avoid partial matches. */
 const TOKEN_RE = /iYYYY|iYY|iMMMM|iMMM|iMM|iM|iDD|iD|iEEEE|iEEE|iE|ioooo|iooo/g;
 
 /**

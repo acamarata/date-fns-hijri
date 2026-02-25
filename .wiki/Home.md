@@ -28,7 +28,7 @@ const eid = addHijriMonths(new Date(2023, 2, 23, 12), 1);
 pnpm add date-fns-hijri hijri-core
 ```
 
-`hijri-core` is a peer dependency — install it alongside this package.
+`hijri-core` is a peer dependency. Install it alongside this package.
 
 ## Table of Contents
 
@@ -39,7 +39,7 @@ pnpm add date-fns-hijri hijri-core
 
 Two calendar systems are built in:
 
-- **UAQ (default):** Umm al-Qura. Official Saudi Arabia calendar. Tabular data covering 1356-1500 AH. Deterministic.
+- **UAQ (default):** Umm al-Qura. Official Saudi Arabia calendar. Tabular data covering 1318-1500 AH (1900-2076 CE). Deterministic.
 - **FCNA:** Fiqh Council of North America. Astronomical calculation. Extends slightly beyond UAQ's range.
 
 Switch calendar system with the `options` argument:

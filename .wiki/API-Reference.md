@@ -20,7 +20,7 @@ function toHijriDate(date: Date, options?: ConversionOptions): HijriDate | null
 
 Convert a Gregorian `Date` to a Hijri date object.
 
-Returns `null` when the date falls outside the calendar's supported range. UAQ covers 1356-1500 AH (approximately 1937-2077 CE).
+Returns `null` when the date falls outside the calendar's supported range. UAQ covers 1318-1500 AH (approximately 1900-2076 CE).
 
 **Parameters:**
 
@@ -37,10 +37,10 @@ Returns `null` when the date falls outside the calendar's supported range. UAQ c
 import { toHijriDate } from 'date-fns-hijri';
 
 toHijriDate(new Date(2023, 2, 23, 12));
-// { hy: 1444, hm: 9, hd: 1 } — 1 Ramadan 1444
+// { hy: 1444, hm: 9, hd: 1 } - 1 Ramadan 1444
 
 toHijriDate(new Date(1800, 0, 1));
-// null — out of range
+// null - out of range
 ```
 
 ---
@@ -96,8 +96,8 @@ Check whether a Hijri date is valid. Verifies year, month (1-12), and day (1-day
 
 ```typescript
 isValidHijriDate(1444, 9, 1);   // true
-isValidHijriDate(1444, 13, 1);  // false — no month 13
-isValidHijriDate(1444, 9, 31);  // false — Ramadan has 29 or 30 days
+isValidHijriDate(1444, 13, 1);  // false - no month 13
+isValidHijriDate(1444, 9, 31);  // false - Ramadan has 29 or 30 days
 ```
 
 ---
@@ -205,7 +205,7 @@ Get the English name of a Hijri month.
 | 9 | Ramadan | Ramadan | Ram |
 | 10 | Shawwal | Shawwal | Shw |
 | 11 | Dhul Qi'dah | Dhul-Qidah | DhQ |
-| 12 | Dhul Hijjah | Dhul-Hijah | DhH |
+| 12 | Dhul Hijjah | Dhul-Hijjah | DhH |
 
 ---
 
