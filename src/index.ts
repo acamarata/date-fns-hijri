@@ -44,9 +44,7 @@ export function fromHijriDate(
 ): Date {
   const result = coreToGregorian(hy, hm, hd, options);
   if (result === null) {
-    throw new Error(
-      `Hijri date ${hy}/${hm}/${hd} is invalid or outside the supported range.`,
-    );
+    throw new Error(`Hijri date ${hy}/${hm}/${hd} is invalid or outside the supported range.`);
   }
   return result;
 }
@@ -106,11 +104,7 @@ export function getHijriDay(date: Date, options?: ConversionOptions): number | n
  *
  * @throws {RangeError} If the year is outside the calendar's supported range.
  */
-export function getDaysInHijriMonth(
-  hy: number,
-  hm: number,
-  options?: ConversionOptions,
-): number {
+export function getDaysInHijriMonth(hy: number, hm: number, options?: ConversionOptions): number {
   return coreDaysInHijriMonth(hy, hm, options);
 }
 
@@ -147,10 +141,7 @@ export function getHijriMonthName(
  * @param date   - Any Gregorian `Date`.
  * @param length - `'long'` (default) or `'short'`.
  */
-export function getHijriWeekdayName(
-  date: Date,
-  length: 'long' | 'short' = 'long',
-): string {
+export function getHijriWeekdayName(date: Date, length: 'long' | 'short' = 'long'): string {
   const day = date.getDay(); // 0–6
   return length === 'short' ? hwShort[day] : hwLong[day];
 }
@@ -197,20 +188,34 @@ export function formatHijriDate(
 
   return formatStr.replace(TOKEN_RE, (token) => {
     switch (token) {
-      case 'iYYYY': return String(h.hy);
-      case 'iYY':   return String(h.hy).slice(-2).padStart(2, '0');
-      case 'iMMMM': return hmLong[h.hm - 1];
-      case 'iMMM':  return hmMedium[h.hm - 1];
-      case 'iMM':   return String(h.hm).padStart(2, '0');
-      case 'iM':    return String(h.hm);
-      case 'iDD':   return String(h.hd).padStart(2, '0');
-      case 'iD':    return String(h.hd);
-      case 'iEEEE': return hwLong[day];
-      case 'iEEE':  return hwShort[day];
-      case 'iE':    return String(hwNumeric[day]);
-      case 'ioooo': return 'AH';
-      case 'iooo':  return 'AH';
-      default:      return token;
+      case 'iYYYY':
+        return String(h.hy);
+      case 'iYY':
+        return String(h.hy).slice(-2).padStart(2, '0');
+      case 'iMMMM':
+        return hmLong[h.hm - 1];
+      case 'iMMM':
+        return hmMedium[h.hm - 1];
+      case 'iMM':
+        return String(h.hm).padStart(2, '0');
+      case 'iM':
+        return String(h.hm);
+      case 'iDD':
+        return String(h.hd).padStart(2, '0');
+      case 'iD':
+        return String(h.hd);
+      case 'iEEEE':
+        return hwLong[day];
+      case 'iEEE':
+        return hwShort[day];
+      case 'iE':
+        return String(hwNumeric[day]);
+      case 'ioooo':
+        return 'AH';
+      case 'iooo':
+        return 'AH';
+      default:
+        return token;
     }
   });
 }
@@ -246,11 +251,7 @@ function utcMidnightToLocalNoon(d: Date): Date {
  *
  * @throws {Error} If the resulting Hijri date is outside the supported range.
  */
-export function addHijriMonths(
-  date: Date,
-  months: number,
-  options?: ConversionOptions,
-): Date {
+export function addHijriMonths(date: Date, months: number, options?: ConversionOptions): Date {
   const h = coreToHijri(date, options);
   if (!h) {
     throw new Error('Date is outside the supported Hijri calendar range.');
@@ -258,7 +259,7 @@ export function addHijriMonths(
 
   // Total months from epoch: 0-based
   const totalMonths = (h.hy - 1) * 12 + (h.hm - 1) + months;
-  const newYear  = Math.floor(totalMonths / 12) + 1;
+  const newYear = Math.floor(totalMonths / 12) + 1;
   const newMonth = (((totalMonths % 12) + 12) % 12) + 1;
 
   // Clamp day to the target month's length
@@ -276,19 +277,15 @@ export function addHijriMonths(
  *
  * @throws {Error} If the resulting Hijri date is outside the supported range.
  */
-export function addHijriYears(
-  date: Date,
-  years: number,
-  options?: ConversionOptions,
-): Date {
+export function addHijriYears(date: Date, years: number, options?: ConversionOptions): Date {
   const h = coreToHijri(date, options);
   if (!h) {
     throw new Error('Date is outside the supported Hijri calendar range.');
   }
 
   const newYear = h.hy + years;
-  const maxDay  = coreDaysInHijriMonth(newYear, h.hm, options);
-  const newDay  = Math.min(h.hd, maxDay);
+  const maxDay = coreDaysInHijriMonth(newYear, h.hm, options);
+  const newDay = Math.min(h.hd, maxDay);
 
   return utcMidnightToLocalNoon(fromHijriDate(newYear, h.hm, newDay, options));
 }
@@ -333,11 +330,7 @@ export function endOfHijriMonth(date: Date, options?: ConversionOptions): Date {
  *
  * Returns `false` if either date is outside the supported range.
  */
-export function isSameHijriMonth(
-  dateA: Date,
-  dateB: Date,
-  options?: ConversionOptions,
-): boolean {
+export function isSameHijriMonth(dateA: Date, dateB: Date, options?: ConversionOptions): boolean {
   const a = coreToHijri(dateA, options);
   const b = coreToHijri(dateB, options);
   if (!a || !b) return false;
@@ -349,11 +342,7 @@ export function isSameHijriMonth(
  *
  * Returns `false` if either date is outside the supported range.
  */
-export function isSameHijriYear(
-  dateA: Date,
-  dateB: Date,
-  options?: ConversionOptions,
-): boolean {
+export function isSameHijriYear(dateA: Date, dateB: Date, options?: ConversionOptions): boolean {
   const a = coreToHijri(dateA, options);
   const b = coreToHijri(dateB, options);
   if (!a || !b) return false;
