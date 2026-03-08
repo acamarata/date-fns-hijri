@@ -180,6 +180,17 @@ Full API reference, architecture notes, and examples: [Wiki](https://github.com/
 - [pray-calc](https://github.com/acamarata/pray-calc) - Islamic prayer times
 - [nrel-spa](https://github.com/acamarata/nrel-spa) - Solar position algorithm
 
+## Compatibility
+
+- Node.js 20, 22, 24
+- ESM and CJS builds included
+- TypeScript definitions bundled
+- Works in browsers and all major bundlers
+
+## Acknowledgments
+
+Calendar data and algorithms provided by [hijri-core](https://github.com/acamarata/hijri-core). The Umm al-Qura table is derived from data published by the King Abdulaziz City for Science and Technology (KACST). FCNA new moon calculations follow Jean Meeus, "Astronomical Algorithms," 2nd ed., Chapter 49.
+
 ## License
 
 MIT. Copyright (c) 2026 Aric Camarata.
