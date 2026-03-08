@@ -90,7 +90,7 @@ Month arithmetic works by converting to a total month offset from the Hijri epoc
 
 ```typescript
 const totalMonths = (h.hy - 1) * 12 + (h.hm - 1) + months;
-const newYear  = Math.floor(totalMonths / 12) + 1;
+const newYear = Math.floor(totalMonths / 12) + 1;
 const newMonth = (((totalMonths % 12) + 12) % 12) + 1;
 ```
 
@@ -109,12 +109,12 @@ This handles the case where month lengths differ (29 vs 30 days) without requiri
 
 `tsup` produces four outputs from a single source:
 
-| File | Format | Purpose |
-| --- | --- | --- |
-| `dist/index.cjs` | CommonJS | Node.js `require()` |
-| `dist/index.mjs` | ESM | `import` / bundlers |
-| `dist/index.d.ts` | TypeScript declarations | CJS consumers |
-| `dist/index.d.mts` | TypeScript declarations | ESM consumers |
+| File               | Format                  | Purpose             |
+| ------------------ | ----------------------- | ------------------- |
+| `dist/index.cjs`   | CommonJS                | Node.js `require()` |
+| `dist/index.mjs`   | ESM                     | `import` / bundlers |
+| `dist/index.d.ts`  | TypeScript declarations | CJS consumers       |
+| `dist/index.d.mts` | TypeScript declarations | ESM consumers       |
 
 `hijri-core` is marked as external so it resolves from the consumer's `node_modules` rather than being bundled. This is required for the peer dependency pattern to work correctly.
 
