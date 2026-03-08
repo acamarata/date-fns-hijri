@@ -169,11 +169,17 @@ const h: HijriDate = { hy: 1444, hm: 9, hd: 1 };
 const opts: ConversionOptions = { calendar: 'fcna' };
 ```
 
+## Architecture
+
+A thin adapter over [hijri-core](https://github.com/acamarata/hijri-core). Each function is a stateless wrapper that delegates to the registered calendar engine. No global state, no configuration object — pass options per call.
+
+For more detail see the [Architecture wiki page](https://github.com/acamarata/date-fns-hijri/wiki/Architecture).
+
 ## Documentation
 
 Full API reference, architecture notes, and examples: [Wiki](https://github.com/acamarata/date-fns-hijri/wiki)
 
-## Related Packages
+## Related
 
 - [hijri-core](https://github.com/acamarata/hijri-core) - Zero-dependency Hijri engine powering this library
 - [luxon-hijri](https://github.com/acamarata/luxon-hijri) - Hijri support for Luxon DateTime objects
