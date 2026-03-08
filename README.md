@@ -171,7 +171,7 @@ const opts: ConversionOptions = { calendar: 'fcna' };
 
 ## Architecture
 
-A thin adapter over [hijri-core](https://github.com/acamarata/hijri-core). Each function is a stateless wrapper that delegates to the registered calendar engine. No global state, no configuration object — pass options per call.
+A thin adapter over [hijri-core](https://github.com/acamarata/hijri-core). Each function is a stateless wrapper that delegates to the registered calendar engine. No global state, no configuration object: pass options per call.
 
 For more detail see the [Architecture wiki page](https://github.com/acamarata/date-fns-hijri/wiki/Architecture).
 
