@@ -8,7 +8,7 @@
 
 > **addHijriMonths**(`date`, `months`, `options?`): `Date`
 
-Defined in: [src/index.ts:267](https://github.com/acamarata/date-fns-hijri/blob/a86df7dc09266326214c15cbd459de48d21cea29/src/index.ts#L267)
+Defined in: [src/index.ts:267](https://github.com/acamarata/date-fns-hijri/blob/e8ade1f9c489d2317f2f324f2a54bebcb30e4d6f/src/index.ts#L267)
 
 Add a number of Hijri months to a Gregorian date.
 
