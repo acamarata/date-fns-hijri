@@ -128,9 +128,13 @@ export function getHijriMonthName(
     throw new RangeError(`Hijri month must be 1–12, got ${hm}.`);
   }
   const idx = hm - 1;
-  if (length === 'medium') return hmMedium[idx];
-  if (length === 'short') return hmShort[idx];
-  return hmLong[idx];
+  // Non-null: hm validated 1-12 above; idx is always 0-11, within all hm* array bounds.
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  if (length === 'medium') return hmMedium[idx]!;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  if (length === 'short') return hmShort[idx]!;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return hmLong[idx]!;
 }
 
 /**
@@ -143,7 +147,9 @@ export function getHijriMonthName(
  */
 export function getHijriWeekdayName(date: Date, length: 'long' | 'short' = 'long'): string {
   const day = date.getDay(); // 0–6
-  return length === 'short' ? hwShort[day] : hwLong[day];
+  // Non-null: day is always 0-6 from getDay(), within hw* array bounds.
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return length === 'short' ? hwShort[day]! : hwLong[day]!;
 }
 
 // ---------------------------------------------------------------------------
@@ -186,16 +192,19 @@ export function formatHijriDate(
 
   const day = date.getDay(); // 0–6
 
-  return formatStr.replace(TOKEN_RE, (token) => {
+  return formatStr.replace(TOKEN_RE, (token): string => {
     switch (token) {
       case 'iYYYY':
         return String(h.hy);
       case 'iYY':
         return String(h.hy).slice(-2).padStart(2, '0');
       case 'iMMMM':
-        return hmLong[h.hm - 1];
+        // Non-null: hm is a valid Hijri month 1-12; index hm-1 is within hmLong bounds.
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        return hmLong[h.hm - 1]!;
       case 'iMMM':
-        return hmMedium[h.hm - 1];
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        return hmMedium[h.hm - 1]!;
       case 'iMM':
         return String(h.hm).padStart(2, '0');
       case 'iM':
@@ -205,11 +214,15 @@ export function formatHijriDate(
       case 'iD':
         return String(h.hd);
       case 'iEEEE':
-        return hwLong[day];
+        // Non-null: day is always 0-6 from getDay(), within hwLong bounds.
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        return hwLong[day]!;
       case 'iEEE':
-        return hwShort[day];
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        return hwShort[day]!;
       case 'iE':
-        return String(hwNumeric[day]);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        return String(hwNumeric[day]!);
       case 'ioooo':
         return 'AH';
       case 'iooo':
