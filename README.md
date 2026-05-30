@@ -29,7 +29,7 @@ import {
 
 // Convert Gregorian to Hijri
 const hijri = toHijriDate(new Date(2023, 2, 23, 12));
-// { hy: 1444, hm: 9, hd: 1 } — 1 Ramadan 1444
+// { hy: 1444, hm: 9, hd: 1 } (1 Ramadan 1444)
 
 // Format with Hijri tokens
 const label = formatHijriDate(new Date(2023, 2, 23, 12), 'iD iMMMM iYYYY ioooo');
@@ -47,15 +47,15 @@ getHijriMonthName(9); // 'Ramadan'
 
 Full API reference, guides, and examples: **[Wiki](https://github.com/acamarata/date-fns-hijri/wiki)**
 
-- [API Reference](https://github.com/acamarata/date-fns-hijri/wiki/API-Reference) — all 17 functions with signatures and examples
-- [Architecture](https://github.com/acamarata/date-fns-hijri/wiki/Architecture) — design decisions and hijri-core integration
+- [API Reference](https://github.com/acamarata/date-fns-hijri/wiki/API-Reference): all 17 functions with signatures and examples
+- [Architecture](https://github.com/acamarata/date-fns-hijri/wiki/Architecture): design decisions and hijri-core integration
 - [Quick Start](https://github.com/acamarata/date-fns-hijri/wiki/guides/quickstart)
 
 ## Related
 
-- [hijri-core](https://github.com/acamarata/hijri-core) — the calendar engine powering this library
-- [luxon-hijri](https://github.com/acamarata/luxon-hijri) — Hijri support for Luxon DateTime objects
-- [pray-calc](https://github.com/acamarata/pray-calc) — Islamic prayer times
+- [hijri-core](https://github.com/acamarata/hijri-core): the calendar engine powering this library
+- [luxon-hijri](https://github.com/acamarata/luxon-hijri): Hijri support for Luxon DateTime objects
+- [pray-calc](https://github.com/acamarata/pray-calc): Islamic prayer times
 
 ## Compatibility
 
