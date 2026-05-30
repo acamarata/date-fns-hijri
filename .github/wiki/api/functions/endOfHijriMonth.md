@@ -1,0 +1,31 @@
+[**date-fns-hijri v1.0.1**](../README.md)
+
+***
+
+[date-fns-hijri](../README.md) / endOfHijriMonth
+
+# Function: endOfHijriMonth()
+
+> **endOfHijriMonth**(`date`, `options?`): `Date`
+
+Defined in: [src/index.ts:328](https://github.com/acamarata/date-fns-hijri/blob/a86df7dc09266326214c15cbd459de48d21cea29/src/index.ts#L328)
+
+Get the last day of the Hijri month that contains the given date.
+
+## Parameters
+
+### date
+
+`Date`
+
+### options?
+
+[`ConversionOptions`](../interfaces/ConversionOptions.md)
+
+## Returns
+
+`Date`
+
+## Throws
+
+If the date is outside the supported range.
