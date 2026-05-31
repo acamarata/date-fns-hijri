@@ -9,11 +9,11 @@ import {
   hwLong,
   hwShort,
   hwNumeric,
-} from 'hijri-core';
+} from "hijri-core";
 
-export type { HijriDate, CalendarEngine, ConversionOptions } from './types';
+export type { HijriDate, CalendarEngine, ConversionOptions } from "./types";
 
-import type { HijriDate, ConversionOptions } from './types';
+import type { HijriDate, ConversionOptions } from "./types";
 
 // ---------------------------------------------------------------------------
 // Conversion
@@ -122,7 +122,7 @@ export function getDaysInHijriMonth(hy: number, hm: number, options?: Conversion
  */
 export function getHijriMonthName(
   hm: number,
-  length: 'long' | 'medium' | 'short' = 'long',
+  length: "long" | "medium" | "short" = "long",
 ): string {
   if (hm < 1 || hm > 12) {
     throw new RangeError(`Hijri month must be 1–12, got ${hm}.`);
@@ -130,9 +130,9 @@ export function getHijriMonthName(
   const idx = hm - 1;
   // Non-null: hm validated 1-12 above; idx is always 0-11, within all hm* array bounds.
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  if (length === 'medium') return hmMedium[idx]!;
+  if (length === "medium") return hmMedium[idx]!;
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  if (length === 'short') return hmShort[idx]!;
+  if (length === "short") return hmShort[idx]!;
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return hmLong[idx]!;
 }
@@ -145,11 +145,11 @@ export function getHijriMonthName(
  * @param date   - Any Gregorian `Date`.
  * @param length - `'long'` (default) or `'short'`.
  */
-export function getHijriWeekdayName(date: Date, length: 'long' | 'short' = 'long'): string {
+export function getHijriWeekdayName(date: Date, length: "long" | "short" = "long"): string {
   const day = date.getDay(); // 0–6
   // Non-null: day is always 0-6 from getDay(), within hw* array bounds.
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  return length === 'short' ? hwShort[day]! : hwLong[day]!;
+  return length === "short" ? hwShort[day]! : hwLong[day]!;
 }
 
 // ---------------------------------------------------------------------------
@@ -188,45 +188,45 @@ export function formatHijriDate(
   options?: ConversionOptions,
 ): string {
   const h = coreToHijri(date, options);
-  if (!h) return '';
+  if (!h) return "";
 
   const day = date.getDay(); // 0–6
 
   return formatStr.replace(TOKEN_RE, (token): string => {
     switch (token) {
-      case 'iYYYY':
+      case "iYYYY":
         return String(h.hy);
-      case 'iYY':
-        return String(h.hy).slice(-2).padStart(2, '0');
-      case 'iMMMM':
+      case "iYY":
+        return String(h.hy).slice(-2).padStart(2, "0");
+      case "iMMMM":
         // Non-null: hm is a valid Hijri month 1-12; index hm-1 is within hmLong bounds.
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         return hmLong[h.hm - 1]!;
-      case 'iMMM':
+      case "iMMM":
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         return hmMedium[h.hm - 1]!;
-      case 'iMM':
-        return String(h.hm).padStart(2, '0');
-      case 'iM':
+      case "iMM":
+        return String(h.hm).padStart(2, "0");
+      case "iM":
         return String(h.hm);
-      case 'iDD':
-        return String(h.hd).padStart(2, '0');
-      case 'iD':
+      case "iDD":
+        return String(h.hd).padStart(2, "0");
+      case "iD":
         return String(h.hd);
-      case 'iEEEE':
+      case "iEEEE":
         // Non-null: day is always 0-6 from getDay(), within hwLong bounds.
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         return hwLong[day]!;
-      case 'iEEE':
+      case "iEEE":
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         return hwShort[day]!;
-      case 'iE':
+      case "iE":
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         return String(hwNumeric[day]!);
-      case 'ioooo':
-        return 'AH';
-      case 'iooo':
-        return 'AH';
+      case "ioooo":
+        return "AH";
+      case "iooo":
+        return "AH";
       default:
         return token;
     }
@@ -267,7 +267,7 @@ function utcMidnightToLocalNoon(d: Date): Date {
 export function addHijriMonths(date: Date, months: number, options?: ConversionOptions): Date {
   const h = coreToHijri(date, options);
   if (!h) {
-    throw new Error('Date is outside the supported Hijri calendar range.');
+    throw new Error("Date is outside the supported Hijri calendar range.");
   }
 
   // Total months from epoch: 0-based
@@ -293,7 +293,7 @@ export function addHijriMonths(date: Date, months: number, options?: ConversionO
 export function addHijriYears(date: Date, years: number, options?: ConversionOptions): Date {
   const h = coreToHijri(date, options);
   if (!h) {
-    throw new Error('Date is outside the supported Hijri calendar range.');
+    throw new Error("Date is outside the supported Hijri calendar range.");
   }
 
   const newYear = h.hy + years;
@@ -315,7 +315,7 @@ export function addHijriYears(date: Date, years: number, options?: ConversionOpt
 export function startOfHijriMonth(date: Date, options?: ConversionOptions): Date {
   const h = coreToHijri(date, options);
   if (!h) {
-    throw new Error('Date is outside the supported Hijri calendar range.');
+    throw new Error("Date is outside the supported Hijri calendar range.");
   }
   return utcMidnightToLocalNoon(fromHijriDate(h.hy, h.hm, 1, options));
 }
@@ -328,7 +328,7 @@ export function startOfHijriMonth(date: Date, options?: ConversionOptions): Date
 export function endOfHijriMonth(date: Date, options?: ConversionOptions): Date {
   const h = coreToHijri(date, options);
   if (!h) {
-    throw new Error('Date is outside the supported Hijri calendar range.');
+    throw new Error("Date is outside the supported Hijri calendar range.");
   }
   const lastDay = coreDaysInHijriMonth(h.hy, h.hm, options);
   return utcMidnightToLocalNoon(fromHijriDate(h.hy, h.hm, lastDay, options));

@@ -1,1 +1,1 @@
-export type { HijriDate, CalendarEngine, ConversionOptions } from 'hijri-core';
+export type { HijriDate, CalendarEngine, ConversionOptions } from "hijri-core";
