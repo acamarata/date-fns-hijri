@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- `toHijriDate` and all field getters now produce exact round-trips on every host timezone (input Date interpreted by its local calendar day, matching date-fns conventions; previously used raw Date which failed in timezones west of UTC against hijri-core's UTC-day contract).
+
+### Changed
+- `fromHijriDate` and all arithmetic/boundary helpers (`addHijriMonths`, `addHijriYears`, `startOfHijriMonth`, `endOfHijriMonth`) now return **local-midnight** Dates instead of UTC midnight / local noon. Use `getFullYear()`/`getMonth()`/`getDate()` (or date-fns `format()`) on the result — not `toISOString()`.
+- Lock-step with unreleased hijri-core `fix/utc-day-boundary` (UTC-day contract).
+
 ## [1.0.2] - 2026-05-30
 
 ### Changed

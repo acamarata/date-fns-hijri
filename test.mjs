@@ -43,21 +43,48 @@ describe('toHijriDate', () => {
     const h = toHijriDate(new Date(1800, 0, 1));
     assert.equal(h, null);
   });
+
+  it('toHijriDate(new Date(2025, 2, 1, 12)) -> {1446, 9, 1}', () => {
+    // Local-noon: verifies local-day interpretation ignores the time component
+    const h = toHijriDate(new Date(2025, 2, 1, 12));
+    assert.ok(h !== null, 'expected non-null');
+    assert.equal(h.hy, 1446);
+    assert.equal(h.hm, 9);
+    assert.equal(h.hd, 1);
+  });
 });
 
 describe('fromHijriDate', () => {
-  it('1 Ramadan 1444 -> 2023-03-23', () => {
+  it('1 Ramadan 1444 -> local 2023-03-23', () => {
     const d = fromHijriDate(1444, 9, 1);
-    assert.equal(d.getUTCFullYear(), 2023);
-    assert.equal(d.getUTCMonth(), 2);
-    assert.equal(d.getUTCDate(), 23);
+    // Returns local midnight: local accessors show the intended calendar day
+    assert.equal(d.getFullYear(), 2023);
+    assert.equal(d.getMonth(), 2);
+    assert.equal(d.getDate(), 23);
   });
 
-  it('1 Muharram 1446 -> 2024-07-07', () => {
+  it('1 Muharram 1446 -> local 2024-07-07', () => {
     const d = fromHijriDate(1446, 1, 1);
-    assert.equal(d.getUTCFullYear(), 2024);
-    assert.equal(d.getUTCMonth(), 6);
-    assert.equal(d.getUTCDate(), 7);
+    assert.equal(d.getFullYear(), 2024);
+    assert.equal(d.getMonth(), 6);
+    assert.equal(d.getDate(), 7);
+  });
+
+  it('round-trip: toHijriDate(fromHijriDate(1446, 9, 1)) === {1446, 9, 1}', () => {
+    const d = fromHijriDate(1446, 9, 1);
+    const h = toHijriDate(d);
+    assert.ok(h !== null, 'expected non-null round-trip result');
+    assert.equal(h.hy, 1446);
+    assert.equal(h.hm, 9);
+    assert.equal(h.hd, 1);
+  });
+
+  it('fromHijriDate(1446,9,1) local accessors show 2025-03-01', () => {
+    const d = fromHijriDate(1446, 9, 1);
+    // Local accessors — not toISOString() — are the correct API for this adapter
+    assert.equal(d.getFullYear(), 2025);
+    assert.equal(d.getMonth(), 2);   // March
+    assert.equal(d.getDate(), 1);
   });
 
   it('throws on invalid month', () => {

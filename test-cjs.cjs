@@ -26,11 +26,12 @@ describe('CJS: toHijriDate', () => {
 });
 
 describe('CJS: fromHijriDate', () => {
-  it('converts to correct Gregorian date', () => {
+  it('converts to correct Gregorian date (local midnight)', () => {
     const d = fromHijriDate(1444, 9, 1);
-    assert.equal(d.getUTCFullYear(), 2023);
-    assert.equal(d.getUTCMonth(), 2);
-    assert.equal(d.getUTCDate(), 23);
+    // Returns local midnight — use local accessors, not UTC
+    assert.equal(d.getFullYear(), 2023);
+    assert.equal(d.getMonth(), 2);
+    assert.equal(d.getDate(), 23);
   });
 });
 

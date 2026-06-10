@@ -51,6 +51,31 @@ Full API reference, guides, and examples: **[Wiki](https://github.com/acamarata/
 - [Architecture](https://github.com/acamarata/date-fns-hijri/wiki/Architecture): design decisions and hijri-core integration
 - [Quick Start](https://github.com/acamarata/date-fns-hijri/wiki/guides/quickstart)
 
+## Day boundaries and time zones
+
+This package follows date-fns local-time conventions:
+
+- **Inputs** (`toHijriDate`, `getHijri*`, `formatHijriDate`, arithmetic, comparisons) — the input `Date` is read by its **local calendar day** (using `getFullYear`/`getMonth`/`getDate`). This matches how date-fns' own `format()` and field accessors work.
+- **Outputs** (`fromHijriDate` and all arithmetic/boundary functions) — returned `Date` values are **local midnight** of the equivalent Gregorian day. Local field accessors and date-fns' `format()` will render the intended date on every timezone.
+
+Round-trips are exact on every host timezone:
+
+```typescript
+toHijriDate(fromHijriDate(1446, 9, 1)); // always { hy: 1446, hm: 9, hd: 1 }
+```
+
+**Pitfall:** `new Date("2025-03-01")` parses as UTC midnight. In timezones west of UTC this resolves to the previous local day (Feb 28), giving an off-by-one result. Use the local-date constructor instead:
+
+```typescript
+// Wrong in timezones west of UTC:
+toHijriDate(new Date("2025-03-01")); // may return 29 Shaban in some zones
+
+// Correct everywhere:
+toHijriDate(new Date(2025, 2, 1)); // always 1 Ramadan 1446
+```
+
+Religious day-start (sunset boundary) is out of scope — this package only handles civil calendar day alignment.
+
 ## Related
 
 - [hijri-core](https://github.com/acamarata/hijri-core): the calendar engine powering this library
