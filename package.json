@@ -1,6 +1,6 @@
 {
   "name": "date-fns-hijri",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "date-fns-style utility functions for Hijri calendar operations. Wraps hijri-core with a functional API for converting, formatting, and validating Hijri dates.",
   "author": "Aric Camarata",
   "license": "MIT",
