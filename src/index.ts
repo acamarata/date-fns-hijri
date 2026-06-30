@@ -432,3 +432,12 @@ export function getHijriQuarter(date: Date, options?: ConversionOptions): number
   if (!h) return null;
   return Math.ceil(h.hm / 3);
 }
+
+// ── Opt-in anonymous telemetry ────────────────────────────────────────────────
+// Off by default. Enable: ACAMARATA_TELEMETRY=1
+// What is sent + how to disable: https://github.com/acamarata/telemetry/blob/main/TELEMETRY.md
+import("@acamarata/telemetry")
+  .then(({ track }) => track("load", { package: "date-fns-hijri", version: "1.0.4" }))
+  .catch(() => {
+    // telemetry not installed or disabled — that's fine
+  });
